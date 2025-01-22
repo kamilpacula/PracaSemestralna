@@ -1,0 +1,16 @@
+package rules;
+
+import org.example.model.Order;
+import org.example.model.Product;
+
+rule "Calculate total price"
+when
+    $order : Order()
+then
+    double total = 0;
+    for (Product product : $order.getProducts()) {
+        total += product.getPrice();
+    }
+    $order.setTotalPrice(total);
+    System.out.println("Total price calculated: " + total);
+end
